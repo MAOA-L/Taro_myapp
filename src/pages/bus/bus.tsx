@@ -1,4 +1,4 @@
-import Taro, { Component } from '@tarojs/taro'
+import Taro, {Component} from '@tarojs/taro'
 import './bus.scss'
 import {AtAccordion, AtCard, AtList, AtSearchBar} from "taro-ui";
 import {View} from "@tarojs/components";
@@ -8,43 +8,72 @@ export default class Bus extends Component {
         navigationBarTitleText: '公交信息'
     }
 
-    componentWillMount () { }
+    app = Taro.getApp()
 
-    componentDidMount () { }
+    componentWillMount() {
+        this.getBusStations()
+    }
 
-    componentWillUnmount () { }
+    componentDidMount() {
+    }
 
-    componentDidShow () { }
+    componentWillUnmount() {
+    }
 
-    componentDidHide () { }
+    componentDidShow() {
+    }
 
-    constructor () {
+    componentDidHide() {
+    }
+
+    constructor() {
         super(...arguments)
         this.state = {
             value: '',
             open: [1, 0],
-            bus:[
-                {number: 102, road: "a->b", note:"This is note"},
-                {number: 103, road: "c->d", note:"This is note2"}
+            bus: [
+                {number: 102, road: "a->b", note: "This is note"},
+                {number: 103, road: "c->d", note: "This is note2"}
             ],
 
         }
     }
-    onChange (value) {
+
+    getBusStations() {
+        Taro.request({
+            url: this.app.host + '/bus/getBusStations/',
+            method: "GET",
+            mode: 'no-cors',
+            header: {
+                'content-type': 'application/json'
+            },
+            success(res){
+                console.log(res.data)
+            },
+            fail(res){
+                console.log(res.data)
+            }
+        })
+    }
+
+    onChange(value) {
         this.setState({
             value: value
         })
     }
-    onActionClick () {
+
+    onActionClick() {
         console.log('开始搜索')
     }
-    handleClick (e) {
+
+    handleClick(e) {
         console.log(e)
         this.setState({
             open: !e
         })
     }
-    render () {
+
+    render() {
         return (
             <View>
                 <AtSearchBar
@@ -59,7 +88,7 @@ export default class Bus extends Component {
                             open={this.state["open"]}
                             onClick={this.handleClick.bind(this, this.state["open"])}
                             title='2字开头'
-                            icon={{ value: 'streaming', color: 'red', size: '18' }}
+                            icon={{value: 'streaming', color: 'red', size: '18'}}
                             hasBorder={false}
                             isAnimation={false}>
                             <AtList hasBorder={false}>

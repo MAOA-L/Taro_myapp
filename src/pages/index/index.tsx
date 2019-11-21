@@ -1,31 +1,45 @@
+//@ts-ignore
 import Taro, {Config} from '@tarojs/taro'
-import { View } from '@tarojs/components'
-import {AtButton, AtTimeline} from "taro-ui";
+import {AtGrid, AtTabsPane} from "taro-ui"
+import {View} from "@tarojs/components";
 
-export default class Index extends Taro.Component{
+export default class Index extends Taro.Component {
 
-  config: Config = {
-    navigationBarTitleText: "首页"
-  }
+    config: Config = {
+        navigationBarTitleText: "首页"
+    }
 
-  render(): any {
+    constructor() {
+        super(...arguments)
+        this.state = {}
+    }
 
-    return(
-        <div>
-        <View className='at-icon at-icon-settings'></View>
-        <AtButton>按钮文案</AtButton>
-        <AtButton type='primary'>按钮文案</AtButton>
-        <AtButton type='secondary'>按钮文案</AtButton>
-          <AtTimeline
-              items={[
-                { title: '刷牙洗脸' },
-                { title: '吃早餐' },
-                { title: '上班' },
-                { title: '睡觉' }
-              ]}
-          >
-          </AtTimeline>
-        </div>
-    )
-  }
+    onClick(e) {
+        if(e.value.indexOf("公交") != -1){
+            Taro.navigateTo({
+                url: '/pages/bus/bus'
+            })
+        }
+    }
+
+    render(): any {
+        return (
+            <div>
+                <AtTabsPane current={0} index={0}>
+                    <View style='padding: 100px 50px;background-color: #FAFBFC;text-align: center;'>功能区</View>
+                </AtTabsPane>
+                <AtGrid
+                    hasBorder={false}
+                    onClick={this.onClick}
+                    data={
+                        [
+                            {
+                                image: 'https://img12.360buyimg.com/jdphoto/s72x72_jfs/t6160/14/2008729947/2754/7d512a86/595c3aeeNa89ddf71.png',
+                                value: '公交查询',
+                            },
+                        ]
+                    }/>
+            </div>
+        )
+    }
 }
