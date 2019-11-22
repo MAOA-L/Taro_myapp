@@ -41,18 +41,21 @@ export default class Bus extends Component {
 
     getBusStations() {
         Taro.request({
-            url: this.app.host + '/bus/getBusStations/',
-            method: "GET",
-            mode: 'no-cors',
+            url: this.app.host+'/bus/getBusStations/',
+            // url: 'http://ws.cyanzoy.top/v1/pc/intelligence/conference/getIntelligenceConferenceTypeList/',
+            data: {
+                foo: 'foo',
+                bar: 10
+            },
             header: {
                 'content-type': 'application/json'
-            },
-            success(res){
-                console.log(res.data)
-            },
-            fail(res){
-                console.log(res.data)
             }
+        }).then(res => {
+            console.log(res.data.data)
+            this.setState({
+                bus: res.data.data
+            })
+            console.log(this.state['bus'])
         })
     }
 

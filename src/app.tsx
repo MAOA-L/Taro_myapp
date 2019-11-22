@@ -56,7 +56,7 @@ class App extends Component {
     }
 
     componentDidMount() {
-        this['host'] = 'http://ws.cyanzoy.top';
+        this['host'] = 'http://127.0.0.1';
     }
 
     componentDidShow() {
