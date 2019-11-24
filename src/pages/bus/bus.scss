@@ -7,3 +7,13 @@
 //手风琴
 @import "~taro-ui/dist/style/components/accordion.scss";
 @import "~taro-ui/dist/style/components/icon.scss";
+.tab-fixed{
+  position: fixed;
+  margin-top:1.5rem;
+  z-index: 888;
+  height: auto;
+}
+.bus-station-view{
+  top: 4rem;
+  position: relative;
+}
